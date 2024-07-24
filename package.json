@@ -1,0 +1,21 @@
+{
+  "name": "typescript-generic-types",
+  "version": "1.0.0",
+  "description": "Generic types for typescript",
+  "main": "index.js",
+  "types": "index.ts",
+  "scripts": {
+    "bump:major": "node node_modules/bump-simple/bump-simple.js --major",
+    "bump:minor": "node node_modules/bump-simple/bump-simple.js --minor",
+    "bump:patch": "node node_modules/bump-simple/bump-simple.js --patch"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bump-simple": "^1.0.24"
+  },
+  "files": [
+    "*.ts",
+    "*"
+  ]
+}
