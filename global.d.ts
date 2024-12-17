@@ -50,6 +50,14 @@ type TypeObjectValues<Obj extends Record<string, any>, Type> = {
   [K in keyof Obj]: Type;
 }
 
+
+/** Return true | false whenever an object has a property of type U */
+type HasPropertyOfType<Objectt extends Record<string, any>, ExpectedType> = {
+  [K in keyof Objectt]: Objectt[K] extends ExpectedType ? true : never;
+}[keyof Objectt] extends never
+  ? false
+  : true
+
 // https://stackoverflow.com/questions/49580725/is-it-possible-to-restrict-typescript-object-to-contain-only-properties-defined
 type NoExtraProperties<T, U extends T = T> = U &
   MakeObjKeysAsNever<Exclude<keyof U, keyof T>>
