@@ -1,6 +1,6 @@
 {
   "name": "typescript-generic-types",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A comprehensive collection of useful TypeScript generic types and utility types to enhance type-safety and developer experience. Includes array, promise, object manipulation, and advanced conditional types.",
   "main": "index.js",
   "types": "index.ts",
