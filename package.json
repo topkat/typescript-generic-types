@@ -1,21 +1,53 @@
 {
   "name": "typescript-generic-types",
   "version": "1.0.2",
-  "description": "Generic types for typescript",
+  "description": "A comprehensive collection of useful TypeScript generic types and utility types to enhance type-safety and developer experience. Includes array, promise, object manipulation, and advanced conditional types.",
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
     "bump:major": "node node_modules/bump-simple/bump-simple.js --major",
     "bump:minor": "node node_modules/bump-simple/bump-simple.js --minor",
-    "bump:patch": "node node_modules/bump-simple/bump-simple.js --patch"
+    "bump:patch": "node node_modules/bump-simple/bump-simple.js --patch",
+    "build": "tsc"
   },
+  "keywords": [
+    "typescript",
+    "types",
+    "generics",
+    "utility-types",
+    "type-safety",
+    "typescript-utils",
+    "typescript-helpers",
+    "type-definitions",
+    "typescript-generics",
+    "type-manipulation",
+    "conditional-types",
+    "mapped-types",
+    "typescript-toolbox",
+    "type-guards",
+    "type-inference"
+  ],
   "author": "",
   "license": "MIT",
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/top-kat/typescript-generic-types"
+  },
+  "bugs": {
+    "url": "https://github.com/top-kat/typescript-generic-types/issues"
+  },
+  "homepage": "https://github.com/top-kat/typescript-generic-types#readme",
+  "peerDependencies": {
+    "typescript": ">=4.0.0"
+  },
+  "devDependencies": {
     "bump-simple": "^1.0.24"
   },
   "files": [
     "*.ts",
     "*"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

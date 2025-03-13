@@ -1,96 +1,120 @@
 # typescript-generic-types
 
-Just `import 'typescript-generic-types'` on a top of any files in your project.
+A comprehensive collection of useful TypeScript generic types to enhance your type-safety and development experience.
 
-It will expose global typescript generic types:
+## Installation
+
+```bash
+npm install typescript-generic-types
+# or
+yarn add typescript-generic-types
+```
+
+## Usage
+
+Simply import the package at the top of any file in your project:
 
 ```typescript
-
-
-type MaybeArray<T> = T | T[]
-type MaybePromise<T> = T | Promise<T>
-
-type FunctionGeneric = (...params: any[]) => any
-type ObjectGeneric = { [k: string]: any }
-
-type ObjectWithNoFn = { [name: string]: NotFunction<any> }
-
-type NotFunction<T>
-
-type AsType<T, Type> = T extends Type ? T : Type
-
-type AsString<T> = AsType<T, string>
-
-type Complete<T> = {
-  [P in keyof Required<T>]: T[P];
-}
-
-type CountryCodeIso = `${Letters}${Letters}`
-type TranslationObj = { [countryIsoCode in CountryCodeIso]?: string }
-
-type Override<T1, T2>
-
-type RecursivePartial<T>
-
-type Letters = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
-
-type SimpleNumbers = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
-
-type ArrayOneOrMore<T>
-
-type RecursiveObjValueType<T, Type>
-
-type TypeObjectValues<Obj extends Record<string, any>, Type>
-
-// https://stackoverflow.com/questions/49580725/is-it-possible-to-restrict-typescript-object-to-contain-only-properties-defined
-type NoExtraProperties<T, U extends T = T>
-type MakeObjKeysAsNever<K extends keyof any> = { [P in K]: never }
-
-type RemoveTypeFromTuple<T, TypeToRemove>
-
-type GetTypeKeyFromObject<ObjType, Type>
-
-/** Remove object key/values that are of a certain type */
-type RemoveTypeFromObj<ObjType, Type>
-
-
-/** Get keys where the key type (number, string, Symbol...) is of Type */
-type GetObjectKeysThatAreOfType<ObjType, Type>
-
-/** Remove Symbol and number from Object type */
-type ForceStringKeyObject<Obj extends Record<any, any>>
-
-
-/** Get all indices of an array as a type. Eg: 0 | 1 | 2... */
-type Indices<T extends readonly any[]>
-
-/** Remove Readonly Modifier */
-type Writeable<T>
-/** Remove Readonly Modifier Recursively */
-type DeepWriteable<T>
-/** used to type generic function without having to do (...params: any) => any */
-type GenericFunction //
-/** used like IsObject<ReturnType> extends true ? .... */
-type IsObject<T> 
-
-type ReadonlyDeep<T>
-
-/** Equivalent of { myPropA: string, otherProp?: never } | { myPropA?: never, otherProp: string }. This would be written Exclusive<{ myPropA: string },  {  otherProp: string }> */
-type Exclusive<
-  A extends Record<string, any>,
-  B extends Record<string, any>,
-  C extends Record<string, any> = {},
-  D extends Record<string, any> = {},
-  E extends Record<string, any> = {}
->
-
-type WeekDays = 0 | 1 | 2 | 3 | 4 | 5 | 6
-
-type StringAndUnion<T>
-
-type ArrayKeys<Arr extends any[] | readonly any[]>
-
-type Env = 'test' | 'development' | 'production' | 'preprod' | 'build' | 'ci'
-
-
+import 'typescript-generic-types'
 ```
+
+## Available Types
+
+### Basic Utility Types
+
+#### `MaybeArray<T>`
+Represents a value that could be either a single item or an array of items.
+```typescript
+type Example = MaybeArray<string>; // string | string[]
+```
+
+#### `MaybePromise<T>`
+Represents a value that could be either the direct type or a Promise of that type.
+```typescript
+type Example = MaybePromise<number>; // number | Promise<number>
+```
+
+#### `FunctionGeneric`
+A type-safe way to represent any function.
+```typescript
+const myFunc: FunctionGeneric = (...args) => console.log(args);
+```
+
+#### `ObjectGeneric`
+Represents any object with string keys and any values.
+```typescript
+const obj: ObjectGeneric = { key: 'value' };
+```
+
+### Advanced Utility Types
+
+#### `NotFunction<T>`
+Ensures a type is not a function.
+
+#### `AsType<T, Type>`
+Forces a type to conform to another type if possible.
+
+#### `Complete<T>`
+Makes all properties of an object required and non-nullable.
+
+#### `RecursivePartial<T>`
+Makes all properties of an object (and its nested objects) optional.
+
+#### `Override<T1, T2>`
+Combines two types, with T2 properties overriding T1 properties.
+
+### String and Array Types
+
+#### `CountryCodeIso`
+Represents ISO country codes (two letters).
+```typescript
+const country: CountryCodeIso = 'us'; // valid
+const invalid: CountryCodeIso = 'usa'; // error
+```
+
+#### `ArrayOneOrMore<T>`
+Ensures an array has at least one element.
+
+#### `ArrayKeys<Arr>`
+Gets the keys (indices) of an array as a type.
+
+### Object Manipulation Types
+
+#### `NoExtraProperties<T>`
+Ensures an object only contains defined properties.
+
+#### `RemoveTypeFromObj<ObjType, Type>`
+Removes properties of a specific type from an object.
+
+#### `ForceStringKeyObject<Obj>`
+Ensures all object keys are strings.
+
+#### `ReadonlyDeep<T>`
+Makes an object and all its nested properties readonly.
+
+### Special Types
+
+#### `Exclusive<A, B, C, D, E>`
+Creates mutually exclusive property sets.
+```typescript
+type Example = Exclusive<{propA: string}, {propB: number}>;
+// Either has propA or propB, but not both
+```
+
+#### `WeekDays`
+Type representing days of the week (0-6).
+
+#### `Env`
+Type for common environment names.
+```typescript
+const env: Env = 'production'; // Valid values: 'test' | 'development' | 'production' | 'preprod' | 'build' | 'ci'
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT
+
