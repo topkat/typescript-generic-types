@@ -152,3 +152,15 @@ type WeekDays = 0 | 1 | 2 | 3 | 4 | 5 | 6
 type StringAndUnion<T> = T | (string & {})
 
 type ArrayKeys<Arr extends any[] | readonly any[]> = keyof Arr & number
+
+
+
+
+type PropsIntersection<T> = (T extends any ? (x: T) => void : never) extends (x: infer R) => void ? R : never
+
+/** Giving a list of object, this will return a type similar to O1 & O2 & O3...
+  * * It works well when with this structure ```type ObjOfObj = Record<string, Record<string>>```
+  * * Giving that structure, if you want to extract ```ObjOfObj[keyof ObjOfObj]``` the type may
+be never because its impossible to match O1 | O2...
+ */
+type MergeMultipleObjects<Obj extends Record<string, any>> = PropsIntersection<Obj[keyof Obj]>
