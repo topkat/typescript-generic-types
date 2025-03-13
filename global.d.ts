@@ -164,3 +164,59 @@ type PropsIntersection<T> = (T extends any ? (x: T) => void : never) extends (x:
 be never because its impossible to match O1 | O2...
  */
 type MergeMultipleObjects<Obj extends Record<string, any>> = PropsIntersection<Obj[keyof Obj]>
+
+
+
+
+/** Giving a list of required fields and subfields (dot notation) this type will return the object with the required fields added to type.
+@example 
+```ts
+type Obj = {
+  a: string;
+  aOptional?: string;
+  b: {
+    c?: string
+    d?: string
+    e: string
+  }
+}
+
+type RequiredFields = {
+  aOptional: true
+  'b.c': true
+}
+
+type Result = AddRequiredFieldsToObject<Obj, RequiredFields>
+
+// PARSED TYPE:
+type Obj = {
+  a: string
+  aOptional: string // this has became required because we specified it in RequiredFields
+  b: {
+    c: string // ALSO did this field
+    d?: string // this one has kept being optional
+    e: string //       " "        " "     required
+  }
+}
+```
+ */
+type AddRequiredFieldsToObject<Obj extends Record<string, any>, RequiredFields extends Record<string, boolean>> = RemoveTypeFromObj<Required<{
+  [K in keyof Obj]:
+  K extends string
+  ? K extends keyof RequiredFields
+  ? (RequiredFields[K] extends true ? Obj[K] : never)
+  : never
+  : never
+}>, never> &
+  RemoveTypeFromObj<Partial<{
+    [K in keyof Obj]:
+    K extends string
+    ? K extends keyof RequiredFields
+    ? (RequiredFields[K] extends true ? never : Obj[K])
+    : Obj[K] extends object
+    ? AddRequiredFieldsToObject<Obj[K], {
+      [P in keyof RequiredFields as P extends `${K}.${infer R}` ? R : never]: RequiredFields[P];
+    }>
+    : Obj[K]
+    : Obj[K]
+  }>, never>

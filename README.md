@@ -51,14 +51,54 @@ const obj: ObjectGeneric = { key: 'value' };
 #### `NotFunction<T>`
 Ensures a type is not a function.
 
+#### `RecursivePartial<T>`
+Makes all properties of an object (and its nested objects) optional.
+
+#### `AddRequiredFieldsToObject<Obj, RequiredFields>`
+Giving a list of required fields and subfields (dot notation) this type will return the object with the required fields added to type
+```typescript
+type Obj = {
+  a: string;
+  aOptional?: string;
+  b: {
+    c?: string
+    d?: string
+    e: string
+  }
+}
+
+type RequiredFields = {
+  aOptional: true
+  'b.c': true
+}
+
+type Result = AddRequiredFieldsToObject<Obj, RequiredFields>
+
+// PARSED TYPE:
+type Result = {
+  a: string
+  aOptional: string // this has became required because we specified it in RequiredFields
+  b: {
+    c: string // ALSO did this field
+    d?: string // this one has kept being optional
+    e: string //       " "        " "     required
+  }
+}
+```
+
+#### `Exclusive<A, B, C, D, E>`
+Creates mutually exclusive property sets.
+```typescript
+type Example = Exclusive<{propA: string}, {propB: number}>;
+// Either has propA or propB, but not both
+```
+
 #### `AsType<T, Type>`
 Forces a type to conform to another type if possible.
 
 #### `Complete<T>`
 Makes all properties of an object required and non-nullable.
 
-#### `RecursivePartial<T>`
-Makes all properties of an object (and its nested objects) optional.
 
 #### `Override<T1, T2>`
 Combines two types, with T2 properties overriding T1 properties.
@@ -91,15 +131,6 @@ Ensures all object keys are strings.
 
 #### `ReadonlyDeep<T>`
 Makes an object and all its nested properties readonly.
-
-### Special Types
-
-#### `Exclusive<A, B, C, D, E>`
-Creates mutually exclusive property sets.
-```typescript
-type Example = Exclusive<{propA: string}, {propB: number}>;
-// Either has propA or propB, but not both
-```
 
 #### `WeekDays`
 Type representing days of the week (0-6).
