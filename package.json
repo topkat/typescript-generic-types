@@ -1,6 +1,6 @@
 {
   "name": "typescript-generic-types",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generic types for typescript",
   "main": "index.js",
   "types": "index.ts",
