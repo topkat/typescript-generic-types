@@ -203,9 +203,12 @@ type Obj = {
 type AddRequiredFieldsToObject<Obj extends Record<string, any>, RequiredFields extends Record<string, boolean>> = RemoveTypeFromObj<Required<{
   [K in keyof Obj]:
   K extends string
+  // ? Obj[K] extends any[] | readonly any[] ? Obj[K] :
   ? K extends keyof RequiredFields
-  ? (RequiredFields[K] extends true ?
-    Obj[K] extends object
+  ? (RequiredFields[K] extends true
+    ? Obj[K] extends any[] | readonly any[]
+    ? Obj[K]
+    : Obj[K] extends object
     ? AddRequiredFieldsToObject<Obj[K], {
       [P in keyof RequiredFields as P extends `${K}.${infer R}` ? R : never]: RequiredFields[P];
     }>
@@ -217,8 +220,10 @@ type AddRequiredFieldsToObject<Obj extends Record<string, any>, RequiredFields e
   RemoveTypeFromObj<{
     [K in keyof Obj]:
     K extends string
+    // ? Obj[K] extends any[] | readonly any[] ? Obj[K] :
     ? K extends keyof RequiredFields
     ? never
+    : Obj[K] extends any[] | readonly any[] ? Obj[K]
     : Obj[K] extends object
     ? AddRequiredFieldsToObject<Obj[K], {
       [P in keyof RequiredFields as P extends `${K}.${infer R}` ? R : never]: RequiredFields[P];
