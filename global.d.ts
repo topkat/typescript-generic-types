@@ -112,8 +112,8 @@ type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> }
 type GenericFunction = (...params: any[]) => any
 /** used like IsObject<ReturnType> extends true ? .... */
 type IsObject<T> = T extends Record<string, any>
-  ? T extends GenericFunction
-  ? false
+  ? T extends GenericFunction ? false
+  : T extends any[] | readonly any[] ? false
   : true
   : false
 
@@ -206,9 +206,7 @@ type AddRequiredFieldsToObject<Obj extends Record<string, any>, RequiredFields e
   // ? Obj[K] extends any[] | readonly any[] ? Obj[K] :
   ? K extends keyof RequiredFields
   ? (RequiredFields[K] extends true
-    ? Obj[K] extends any[] | readonly any[]
-    ? Obj[K]
-    : Obj[K] extends object
+    ? IsObject<Obj[K]> extends true
     ? AddRequiredFieldsToObject<Obj[K], {
       [P in keyof RequiredFields as P extends `${K}.${infer R}` ? R : never]: RequiredFields[P];
     }>
@@ -223,8 +221,7 @@ type AddRequiredFieldsToObject<Obj extends Record<string, any>, RequiredFields e
     // ? Obj[K] extends any[] | readonly any[] ? Obj[K] :
     ? K extends keyof RequiredFields
     ? never
-    : Obj[K] extends any[] | readonly any[] ? Obj[K]
-    : Obj[K] extends object
+    : IsObject<Obj[K]> extends true
     ? AddRequiredFieldsToObject<Obj[K], {
       [P in keyof RequiredFields as P extends `${K}.${infer R}` ? R : never]: RequiredFields[P];
     }>
