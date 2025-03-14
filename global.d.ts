@@ -226,3 +226,17 @@ type AddRequiredFieldsToObject<Obj extends Record<string, any>, RequiredFields e
     : Obj[K]
     : never
   }, never>
+
+
+/**
+ * Removes the first element from a tuple type.
+ *
+ * @example
+ * ```ts
+ * type Example1 = RemoveFirst<[boolean, number, string]>; // [number, string]
+ * type Example2 = RemoveFirst<[boolean, string]>; // [string]
+ * type Example3 = RemoveFirst<[boolean]>; // []
+ * type Example4 = RemoveFirst<[]>; // never
+ * ```
+ */
+type RemoveFirstElementFromTuple<T extends any[]> = T extends [any, ...infer Rest] ? Rest : never;

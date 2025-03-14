@@ -86,6 +86,14 @@ type Result = {
 }
 ```
 
+#### RemoveFirstElementFromTuple
+```ts
+type Example1 = RemoveFirst<[boolean, number, string]>; // [number, string]
+type Example2 = RemoveFirst<[boolean, string]>; // [string]
+type Example3 = RemoveFirst<[boolean]>; // []
+type Example4 = RemoveFirst<[]>; // never
+```
+
 #### `Exclusive<A, B, C, D, E>`
 Creates mutually exclusive property sets.
 ```typescript
