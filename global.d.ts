@@ -5,6 +5,8 @@ type Env = 'test' | 'development' | 'production' | 'preprod' | 'build' | 'ci'
 type MaybeArray<T> = T | T[]
 type MaybePromise<T> = T | Promise<T>
 
+type HasKeys<T> = keyof T extends never ? false : true
+
 type FunctionGeneric = (...params: any[]) => any
 type ObjectGeneric = { [k: string]: any }
 

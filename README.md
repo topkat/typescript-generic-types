@@ -46,6 +46,9 @@ Represents any object with string keys and any values.
 const obj: ObjectGeneric = { key: 'value' };
 ```
 
+#### `HasKeys`
+Check if the object type has some keys. Return 'false' if there is no keys
+
 ### Advanced Utility Types
 
 #### `NotFunction<T>`
