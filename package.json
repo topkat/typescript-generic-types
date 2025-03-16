@@ -5,9 +5,10 @@
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
-    "bump:major": "node node_modules/bump-simple/bump-simple.js --major",
-    "bump:minor": "node node_modules/bump-simple/bump-simple.js --minor",
-    "bump:patch": "node node_modules/bump-simple/bump-simple.js --patch",
+    "bump": "bump --patch",
+    "bump:patch": "bump --patch",
+    "bump:minor": "bump --minor",
+    "bump:major": "bump --major",
     "build": "tsc"
   },
   "keywords": [
@@ -41,7 +42,7 @@
     "typescript": ">=4.0.0"
   },
   "devDependencies": {
-    "bump-simple": "^1.0.24"
+    "bump-simple": "^1.0.29"
   },
   "files": [
     "*.ts",
