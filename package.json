@@ -5,11 +5,12 @@
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
-    "bump": "bump --patch",
-    "bump:patch": "bump --patch",
-    "bump:minor": "bump --minor",
-    "bump:major": "bump --major",
-    "build": "tsc"
+    "bump": "yarn build && bump --patch",
+    "bump:patch": "yarn build && bump --patch",
+    "bump:minor": "yarn build && bump --minor",
+    "bump:major": "yarn build && bump --major",
+    "build": "bun generateClassicExports.ts",
+    "preversion": "npm run build"
   },
   "keywords": [
     "typescript",
@@ -42,7 +43,9 @@
     "typescript": ">=4.0.0"
   },
   "devDependencies": {
-    "bump-simple": "^1.0.29"
+    "bump-simple": "^1.0.29",
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
   },
   "files": [
     "*.ts",
