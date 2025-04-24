@@ -33,7 +33,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/top-kat/typescript-generic-types"
+    "url": "git+https://github.com/top-kat/typescript-generic-types.git"
   },
   "bugs": {
     "url": "https://github.com/top-kat/typescript-generic-types/issues"
