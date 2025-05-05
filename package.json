@@ -9,7 +9,7 @@
     "bump:patch": "yarn build && bump --patch",
     "bump:minor": "yarn build && bump --minor",
     "bump:major": "yarn build && bump --major",
-    "build": "bun generateClassicExports.ts",
+    "build": "ts-node generateClassicExports.ts",
     "preversion": "npm run build"
   },
   "keywords": [
@@ -43,8 +43,8 @@
     "typescript": ">=4.0.0"
   },
   "devDependencies": {
-    "bump-simple": "^1.0.29",
     "@types/node": "^20.11.24",
+    "bump-simple": "^1.0.29",
     "typescript": "^5.3.3"
   },
   "files": [
