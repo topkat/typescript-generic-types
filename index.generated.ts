@@ -23,9 +23,6 @@ export type Complete<T> = {
   [P in keyof Required<T>]: T[P];
 }
 
-export type CountryCodeIso = `${Letters}${Letters}`
-export type TranslationObj = { [countryIsoCode in CountryCodeIso]?: string }
-
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 
 export type RecursivePartial<T> = {
