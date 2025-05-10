@@ -33,12 +33,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/top-kat/typescript-generic-types.git"
+    "url": "git+https://github.com/topkat/typescript-generic-types.git"
   },
   "bugs": {
-    "url": "https://github.com/top-kat/typescript-generic-types/issues"
+    "url": "https://github.com/topkat/typescript-generic-types/issues"
   },
-  "homepage": "https://github.com/top-kat/typescript-generic-types#readme",
+  "homepage": "https://github.com/topkat/typescript-generic-types#readme",
   "peerDependencies": {
     "typescript": ">=4.0.0"
   },
