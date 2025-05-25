@@ -111,9 +111,11 @@ export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> }
 /** used to type generic function without having to do (...params: any) => any */
 export type GenericFunction = (...params: any[]) => any
 /** used like IsObject<ReturnType> extends true ? .... */
-export type IsObject<T> = T extends Record<string, any>
+export type IsObject<T, ConsiderDateAndRegexpsAsObjects = false> = T extends Record<string, any>
   ? T extends GenericFunction ? false
-  : T extends any[] | readonly any[] ? false
+  : T extends (any[] | readonly any[]) ? false
+  : ConsiderDateAndRegexpsAsObjects extends false ? T extends (Date | RegExp) ? false
+  : true
   : true
   : false
 
