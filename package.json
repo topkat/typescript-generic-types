@@ -1,14 +1,15 @@
 {
   "name": "typescript-generic-types",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "A comprehensive collection of useful TypeScript generic types and utility types to enhance type-safety and developer experience. Includes array, promise, object manipulation, and advanced conditional types.",
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
-    "bump": "yarn build && bump --patch",
-    "bump:patch": "yarn build && bump --patch",
-    "bump:minor": "yarn build && bump --minor",
-    "bump:major": "yarn build && bump --major",
+    "bump": "dotenv -- bash -c 'yarn build && bump --patch'",
+    "bump:fast": "dotenv -- bash -c 'yarn build && bump --patch'",
+    "bump:major": "dotenv -- bash -c 'yarn build && bump --major'",
+    "bump:minor": "dotenv -- bash -c 'yarn build && bump --minor'",
+    "bump:patch": "dotenv -- bash -c 'yarn build && bump --patch'",
     "build": "ts-node generateClassicExports.ts",
     "preversion": "npm run build"
   },
